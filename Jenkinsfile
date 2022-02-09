@@ -25,7 +25,7 @@ pipeline {
         echo 'Here must deploy'
         sh 'git checkout release'
         sh 'git merge origin/develop'
-        sh 'git push origin release'
+        sh 'git push -u origin release'
       }
 
     }

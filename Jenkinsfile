@@ -23,7 +23,7 @@ pipeline {
     stage('Deploy on Release branch'){
       steps {
         echo 'Here must deploy'
-        sh 'git checkout -b release'
+        sh 'git checkout release'
         sh 'git merge origin develop'
         sh 'git push origin release'
       }

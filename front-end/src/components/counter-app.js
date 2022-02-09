@@ -37,8 +37,7 @@ export default class CounterApp extends React.Component {
     refreshPage = () => {
         console.log("go there")
         this.setState(
-            {reload: true},
-            () => this.setState({reload: false})
+            {reload: true}
         )
         axios.get(baseURL)
             .then(response => this.setState({ counter_time: response.data.pageCount }))

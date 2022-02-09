@@ -3,7 +3,6 @@ const cors = require("cors");
 const session = require("express-session");
 const logger = require("morgan");
 const app = express();
-const counterRouter = require("./routes/counter_app");
 
 var corsOptions = {
   origin: "http://localhost:3000"

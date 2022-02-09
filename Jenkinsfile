@@ -8,13 +8,14 @@ pipeline {
         sh 'ls'
       }
     }
-    stage('Build Docker test'){
+    stage('Docker-compose Up'){
       steps {
-        //sh 'docker build -t app-jenkins -f Dockerfile --no-cache .'
-         echo 'Here must build'
+        sh ' docker-compose -f docker-compose.yml up -d'
+        echo 'Here must build'
+        sh ' docker-compose -f docker-compose.yml down'
       }
       }
-    stage('Deploy'){
+    stage('Deploy on Release branch'){
       steps {
         echo 'Here must deploy'
       }

@@ -16,14 +16,10 @@ pipeline {
       }
     stage('Deploy on Release branch'){
       steps {
-          echo 'Here must deploy'
-          sh 'git fetch origin'
-          sh 'git checkout release'
-          sh 'git merge release'
-          withCredentials([string(credentialsId: 'ChloeCarayon', variable: 'token')]) {
-                                sh 'git push https://%token%@github.com/ChloeCarayon/TP6_DataEng.git'
-                            }
-        //sh 'git push -u origin release'
+            echo 'Here must deploy'
+            sh 'git fetch origin'
+            sh 'git checkout release'
+            sh 'git merge origin/develop'
       }
 
     }

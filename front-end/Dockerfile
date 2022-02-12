@@ -11,4 +11,4 @@ FROM base as prod
 CMD ["npm", "start"]
 
 FROM base as test
-CMD [ "npm", "run", "test", "--", "--watchAll=false" ]
+CMD [ "npm", "run", "test", "--", "--watchAll=false", "--verbose" ]

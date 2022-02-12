@@ -17,8 +17,9 @@ pipeline {
       stage('Test app'){
             steps {
               echo 'Here must test'
-              sh 'cd front-end'
-              sh 'npm test -- --watchAll=false --verbose'
+              dir('front-end') {
+                 sh 'npm test -- --watchAll=false --verbose'
+              }
               sh ' docker-compose -f docker-compose.yml down'
             }
             }

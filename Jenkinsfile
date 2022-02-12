@@ -18,7 +18,7 @@ pipeline {
             steps {
               echo 'Here must test'
               echo 'sh cd front-end'
-              echo 'sh npm test -- --watchAll=false'
+              echo 'sh npm test -- --watchAll=false --verbose'
               sh ' docker-compose -f docker-compose.yml down'
             }
             }

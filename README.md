@@ -17,6 +17,7 @@ Steps of Jenkins
 - Echo Environment variables
 - Docker-compose up
 - Test and docker-compose down
+    Add connection and test on request
 - Deployment on release branch (issues with credentials wip)
 
 In order to visualize front-end go to:

@@ -1,16 +1,9 @@
 import React from "react";
 import axios from 'axios';
 jest.mock('axios');
-const isReachable = require('is-reachable');
 const baseURL ='http://localhost:8083'
 
 describe('Test on requests', () => {
-    it('Should connect', async () => {
-        const reachable = await isReachable(baseURL)
-        expect(reachable).toBe(true)
-
-    });
-
     /*
     it('Should get correct pageCount', async () => {
         const data = {pageCount: 1}

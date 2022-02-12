@@ -1,14 +1,11 @@
 pipeline {
   agent any
-  environment {
-          ENV = 'prod'
-  }
   stages {
     stage('Environment') {
       steps {
         sh 'git --version'
+        sh 'git remote -v'
         sh 'docker -v'
-        sh 'ls'
       }
     }
     stage('Docker Test and Run'){
@@ -20,11 +17,13 @@ pipeline {
     stage('Deploy on Release branch'){
       steps {
           echo 'Here must deploy'
-          sh 'git remote -v'
           sh 'git fetch origin'
           sh 'git checkout release'
           sh 'git merge release'
-        sh 'git push -u origin release'
+          withCredentials([string(credentialsId: 'ChloeCarayon', variable: 'token')]) {
+                                sh 'git push https://%token%@github.com/ChloeCarayon/TP6_DataEng.git'
+                            }
+        //sh 'git push -u origin release'
       }
 
     }

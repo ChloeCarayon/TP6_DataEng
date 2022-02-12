@@ -1,61 +1,47 @@
 import React from 'react';
 import axios from 'axios';
-const baseURL ='http://localhost:8083'
 
 export default class CounterApp extends React.Component {
+
     constructor(props) {
         super(props);
         this.state = {
-            counter_time: [],
+            counter_time: null,
+            reload:false,
+            baseURL: 'http://localhost:8083',
             error: null,
-            reload:false
         }
+        axios.defaults.withCredentials = true
     }
 
     componentDidMount() {
-        axios.get(baseURL)
-            .then(response => this.setState({ counter_time: response.data.pageCount }))
-            .catch(error => {
-                this.setState({ error: error.message });
-                console.error('There was an error!', error);
-            });
-    }
-
-    componentDidUpdate(prevProps) {
-        if (prevProps.reload !== this.props.reload) {
-            console.log("go there")
-            axios.get(baseURL)
-                .then(response => this.setState({ counter_time: response.data.pageCount }))
-                .catch(error => {
-                    this.setState({ error: error.message });
-                    console.error('There was an error!', error);
-                });
-            this.setState({ reload: false })
+        try {
+            this.getCounter()
         }
-    };
+        catch(error) {
+            throw error
+        }
+    }
 
-    refreshPage = () => {
-        console.log("go there")
-        this.setState(
-            {reload: true}
-        )
-        axios.get(baseURL)
+    getCounter = () => {
+        axios.get(this.state.baseURL)
             .then(response => this.setState({ counter_time: response.data.pageCount }))
             .catch(error => {
                 this.setState({ error: error.message });
                 console.error('There was an error!', error);
             });
     }
+
 
     render() {
         if (this.state.error) {
             return <h1>Caught an error.</h1>
         }
         return (
-            <div className="Test">
+            <h1>
                 Number of time you visit webpage:
                 { this.state.counter_time}
-            </div>
+            </h1>
         )
 
     }

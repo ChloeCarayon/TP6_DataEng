@@ -17,15 +17,18 @@ pipeline {
       stage('Test app'){
             steps {
               echo 'Here must test'
+              echo 'sh cd front-end'
+              echo 'sh npm test -- --watchAll=false'
               sh ' docker-compose -f docker-compose.yml down'
             }
             }
     stage('Deploy on Release branch'){
       steps {
-        echo 'Here must deploy'
-        sh 'git checkout release'
-        sh 'git merge origin/develop'
-        sh 'git push origin release'
+          echo 'Here must deploy'
+          sh 'git checkout release'
+          sh 'git merge origin/develop'
+          sh 'git commit -am "Updated version"'
+          sh 'git push origin release'
       }
 
     }

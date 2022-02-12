@@ -24,11 +24,13 @@ app.use(session({
                  }));
 
 app.get('/', function(req, res){
-  if (!req.session.pageCountByCurrentUserOrAnyNameYouWant)
-    req.session.pageCountByCurrentUserOrAnyNameYouWant = 0;
-  req.session.pageCountByCurrentUserOrAnyNameYouWant++;
+    res.header("Access-Control-Allow-Origin", "http://localhost:3000")
+    res.header("Access-Control-Allow-Credentials", "true")
+  if (!req.session.pageCountByCurrentUser)
+    req.session.pageCountByCurrentUser = 0;
+  req.session.pageCountByCurrentUser++;
   res.send({
-    pageCount: req.session.pageCountByCurrentUserOrAnyNameYouWant
+    pageCount: req.session.pageCountByCurrentUser
   });
 });
 

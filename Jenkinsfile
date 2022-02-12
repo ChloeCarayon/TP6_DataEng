@@ -1,5 +1,8 @@
 pipeline {
   agent any
+  environment {
+          ENV = 'prod'
+  }
   stages {
     stage('Environment') {
       steps {
@@ -8,19 +11,17 @@ pipeline {
         sh 'ls'
       }
     }
-    stage('Docker-compose Up'){
+    stage('Docker Test'){
       steps {
+        sh ''
         echo 'Here must build'
-        sh ' docker-compose -f docker-compose.yml up -e ENVFront=PROD -d '
+        sh ' docker-compose -f docker-compose-test.yml up -d '
+        sh ' docker-compose -f docker-compose-test.yml down'
       }
       }
-      stage('Test app'){
+      stage('Docker in production'){
             steps {
-              echo 'Here must test'
-              dir('front-end') {
-                 sh 'npm test -- --watchAll=false --verbose'
-              }
-              sh ' docker-compose -f docker-compose.yml down'
+              sh ' docker-compose -f docker-compose.yml up -d '
             }
             }
     stage('Deploy on Release branch'){

@@ -1,7 +1,11 @@
 version: "3.9"
 services:
   front-end:
-    build: front-end/
+    build:
+      context: front-end/
+      target: ENV
+    environment:
+      - ENV
     ports:
       - "3000:3000"
   back-end:

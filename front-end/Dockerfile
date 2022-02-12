@@ -7,13 +7,8 @@ COPY . /app
 EXPOSE 3000
 
 
-#FROM base as prod
-#RUN npm ci
-#COPY . .
+FROM base as prod
 CMD ["npm", "start"]
 
-#FROM base as test
-#RUN npm ci
-#COPY . .
-#CMD [ "npm", "run", "test", "--", "--watchAll=false", "--verbose"  ]
-
+FROM base as test
+CMD [ "npm", "run", "test", "--", "--watchAll=false" ]

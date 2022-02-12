@@ -11,7 +11,7 @@ pipeline {
     stage('Docker-compose Up'){
       steps {
         echo 'Here must build'
-        sh ' docker-compose -f docker-compose.yml up -d'
+        sh ' docker-compose -f docker-compose.yml up -e ENVFront=PROD -d '
       }
       }
       stage('Test app'){

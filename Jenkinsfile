@@ -13,7 +13,6 @@ pipeline {
     }
     stage('Docker Test and Run'){
       steps {
-        sh ''
         echo 'Here must build'
         sh ' docker-compose -f docker-compose.yml up -d '
       }
@@ -21,10 +20,11 @@ pipeline {
     stage('Deploy on Release branch'){
       steps {
           echo 'Here must deploy'
+          sh 'git remote -v'
+          sh 'git fetch origin'
           sh 'git checkout release'
-          sh 'git merge origin/develop'
-          sh 'git commit -am "Updated version"'
-          sh 'git push origin release'
+          sh 'git merge release'
+        sh 'git push -u origin release'
       }
 
     }

@@ -5,10 +5,7 @@ COPY package.json /app
 RUN npm install
 COPY . /app
 EXPOSE 3000
-
-
-FROM base as prod
+ENV CI=true
+RUN npm run test
+RUN npm run build
 CMD ["npm", "start"]
-
-FROM base as test
-CMD [ "npm", "run", "test", "--", "--watchAll=false", "--verbose" ]

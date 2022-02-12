@@ -11,19 +11,13 @@ pipeline {
         sh 'ls'
       }
     }
-    stage('Docker Test'){
+    stage('Docker Test and Run'){
       steps {
         sh ''
         echo 'Here must build'
-        sh ' docker-compose -f docker-compose-test.yml up -d '
-        sh ' docker-compose -f docker-compose-test.yml down'
+        sh ' docker-compose -f docker-compose.yml up -d '
       }
       }
-      stage('Docker in production'){
-            steps {
-              sh ' docker-compose -f docker-compose.yml up -d '
-            }
-            }
     stage('Deploy on Release branch'){
       steps {
           echo 'Here must deploy'
